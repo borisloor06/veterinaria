@@ -2,7 +2,7 @@ on:
   push:
     branches: [ "main" ]
     paths:
-        - 'backend/**'
+        - 'veterinaria/**'
   workflow_dispatch:
 
 jobs:
@@ -40,8 +40,8 @@ jobs:
         env:
           NEW_VERSION: ${{ steps.version.outputs.version }}
         run: |
-          docker build -t bloor06/veterinaria:$NEW_VERSION .
-          docker build -t bloor06/veterinaria:latest .
+          docker build -t bloor06/veterinaria-front:$NEW_VERSION .
+          docker build -t bloor06/veterinaria-front:latest .
 
       # Step 5: Push Docker Image
       # - Explanation: Push Docker images to Docker Hub with the specified version
@@ -49,5 +49,5 @@ jobs:
         env:
           NEW_VERSION: ${{ steps.version.outputs.version }}
         run: |
-          docker push bloor06/veterinaria:$NEW_VERSION
-          docker push bloor06/veterinaria:latest
+          docker push bloor06/veterinaria-front:$NEW_VERSION
+          docker push bloor06/veterinaria-front:latest
