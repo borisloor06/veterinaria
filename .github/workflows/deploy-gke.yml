@@ -20,18 +20,17 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Set up GKE
-        uses: google-github-actions/auth@v2
+      - uses: google-github-actions/setup-gcloud@1bee7de035d65ec5da40a31f8589e240eba8fde5
         with:
-          workload_identity_provider: projects/1055208873800/locations/global/workloadIdentityPools/github/providers/veterinaria
+          service_account_key: ${{ secrets.GKE_SA_KEY }}
           project_id: ${{ secrets.GKE_PROJECT }}
 
-      - id: 'get-credentials'
-        uses: 'google-github-actions/get-gke-credentials@v1'
+      # Get the GKE credentials so we can deploy to the cluster
+      - uses: google-github-actions/get-gke-credentials@db150f2cc60d1716e61922b832eae71d2a45938f
         with:
-          project_id: ${{ secrets.GKE_PROJECT }}
-          cluster_name: 'vet-cluster'
-          location: 'us-central1'
+          cluster_name: ${{ secrets.GKE_CLUSTER }}
+          location: ${{ secrets.GKE_ZONE }}
+          credentials: ${{ secrets.GKE_SA_KEY }}
 
       - name: List files in kube directory
         run: |
