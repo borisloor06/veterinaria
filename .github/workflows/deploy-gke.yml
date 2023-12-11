@@ -25,9 +25,6 @@ jobs:
           project_id: ${{ secrets.GKE_PROJECT }}
           workload_identity_provider: projects/1055208873800/locations/global/workloadIdentityPools/github/providers/veterinaria
 
-      - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@v2
-
       # Get the GKE credentials so we can deploy to the cluster
       - uses: google-github-actions/get-gke-credentials@v2
         with:
