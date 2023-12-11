@@ -17,19 +17,13 @@ jobs:
         with:
           fetch-depth: 0
 
-      - run: ls
-
-      - name: GKE Set Context
-        uses: google-github-actions/setup-gcloud@v0.6.0
+      - uses: tale/kubectl-action@v1
         with:
-          service_account_key: ${{ secrets.GKE_SA_KEY }}
-          project_id: ${{ secrets.GKE_PROJECT }}
-          export_default_credentials: true 
+          base64-kube-config: ${{ secrets.KUBE_CONF }}
+          kubectl-version: v1.24.2
 
       - name: Deploy to GKE
         working-directory: ./kube
         run: |
-          ls
-          echo $PWD
           kubectl apply -f ./auth-gateway -f ./backend -f ./frontend -f ./auth-microservice -f ./mongo -f ./postgresql -f ./socket -f ./graphql
           kubectl get pods
