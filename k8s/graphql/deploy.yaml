@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: graphql-deployment
+  labels:
+    app: graphql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: graphql
+  template:
+    metadata:
+      labels:
+        app: graphql
+    spec:
+      containers:
+      - name: graphql
+        image: bloor06/veterinaria-graphql:0.0.6
+        ports:
+        - containerPort: 3002
+        env:
+        - name: AUTH_API_URL
+          valueFrom:
+            configMapKeyRef:
+              name: graphql-config
+              key: AUTH_API_URL
+        - name: DB_CONNECTION_STRING
+          valueFrom:
+            configMapKeyRef:
+              name: graphql-config
+              key: DB_CONNECTION_STRING

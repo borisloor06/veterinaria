@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: microservice-service
+spec:
+  type: LoadBalancer
+
+  selector:
+    app: microservice
+  ports:
+    - protocol: TCP
+      port: 3005 # cualquier puerto
+      targetPort: 3005
+      nodePort: 30305

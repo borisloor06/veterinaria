@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: microservice-deployment
+  labels:
+    app: microservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: microservice
+  template:
+    metadata:
+      labels:
+        app: microservice
+    spec:
+      containers:
+      - name: microservice
+        image: bloor06/veterinaria-microservice:0.0.6
+        ports:
+        - containerPort: 3005
+        env:
+        - name: DB_CONNECTION_STRING
+          valueFrom:
+            configMapKeyRef:
+              name: microservice-config
+              key: DB_CONNECTION_STRING
+        - name: JWT_SECRET_KEY
+          valueFrom:
+            configMapKeyRef:
+              name: microservice-config
+              key: JWT_SECRET_KEY
+        - name: AMQP_URL
+          valueFrom:
+            configMapKeyRef:
+              name: microservice-config
+              key: AMQP_URL
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: postgres-config
+              key: DB_HOST
+        - name: DB_CONNECTION_STRING
+          valueFrom:
+            configMapKeyRef:
+              name: postgres-config
+              key: DB_CONNECTION_STRING
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: postgres-config
+              key: DB_PORT
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secrets
+              key: DB_PASSWORD
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secrets
+              key: DB_USER
+        - name: DB_DATABASE
+          configMapKeyRef:
+              name: postgres-config
+              key: DB_DATABASE

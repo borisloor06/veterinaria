@@ -1,0 +1,45 @@
+version: "3.8"
+services:
+  mongodb:
+    image: 'mongo'
+    ports:
+      - '9001:27017'
+    volumes:
+      - /data/db
+    restart: always
+    command: --quiet --logpath /dev/null
+    # environment:
+    #   MONGO_INITDB_ROOT_USERNAME: max
+    #   MONGO_INITDB_ROOT_PASSWORD: secret
+    # - MONGO_INITDB_ROOT_USERNAME=max
+    # env_file:
+    #   - ./env/mongo.env
+    stdin_open: true
+    tty: true
+  backend:
+    build: ./backend
+    # build:
+    #   context: ./backend
+    #   dockerfile: Dockerfile
+    #   args:
+    #     some-arg: 1
+    environment:
+      - db=mongodb://mongodb
+    ports:
+      - '80:80'
+    volumes:
+      # - logs:/app/logs
+      - ./backend:/app
+      - /app/node_modules
+    depends_on:
+      - mongodb
+    stdin_open: true
+    tty: true
+  frontend:
+    build: ./veterinaria
+    ports:
+      - '5173:5173'
+    stdin_open: true
+    tty: true
+    depends_on:
+      - backend

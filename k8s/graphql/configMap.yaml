@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: graphql-config
+data:
+  AUTH_API_URL: http://localhost:3000/auth
+  DB_CONNECTION_STRING: mongodb://kubernetes:clave@mongo-service:27017/?retryWrites=true&w=majority

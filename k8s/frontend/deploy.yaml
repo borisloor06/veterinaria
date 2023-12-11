@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+  labels:
+    app: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: bloor06/veterinaria-front:0.0.6
+        ports:
+        - containerPort: 3006
+        env:
+        - name: BACKEND_URL
+          valueFrom:
+            configMapKeyRef:
+              name: frontend-config
+              key: BACKEND_URL
+        - name: AUTH_URL
+          valueFrom:
+            configMapKeyRef:
+              name: frontend-config
+              key: AUTH_URL
+        - name: GRAPHQL_URL
+          valueFrom:
+            configMapKeyRef:
+              name: frontend-config
+              key: GRAPHQL_URL
+        - name: SOCKET_URL
+          valueFrom:
+            configMapKeyRef:
+              name: frontend-config
+              key: SOCKET_URL

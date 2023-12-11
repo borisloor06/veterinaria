@@ -1,0 +1,67 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type CompraDetalle {
+  detalle_producto: String!
+  valor_unitario: Float!
+  cantidad_producto: Float!
+  subtotal: Float!
+  iva: Float!
+  total: Float!
+}
+
+type Proveedor {
+  RUC: String!
+  nombre_proveedor: String!
+  apellido_proveedor: String!
+}
+
+type TipoProducto {
+  nombre: String!
+  detalle: String!
+}
+
+type Producto {
+  id_tipo_producto: TipoProducto!
+  nombre_producto: String!
+}
+
+type Veterinaria {
+  nombre_veterinaria: String!
+  direccion: String!
+}
+
+type Compra {
+  id_veterinaria: Veterinaria!
+  id_producto: Producto!
+  id_proveedor: Proveedor!
+  id_compra_detalle: CompraDetalle!
+  fecha_compra: String!
+  active: Boolean!
+}
+
+type Query {
+  compras: [Compra!]!
+  compra(id: ID!): Compra!
+  comprasByDateRange(startDate: String!, endDate: String!): [Compra!]!
+}
+
+type Mutation {
+  createCompra(createCompraDto: CreateCompraDto!): Compra!
+  updateCompra(id: ID!, updateCompraDto: UpdateCompraDto!): Compra!
+  removeCompra(id: ID!): Compra!
+  updateAllActiveCompra: Compra!
+}
+
+input CreateCompraDto {
+  id_veterinaria: String!
+  id_producto: String!
+  id_proveedor: String!
+  id_compra_detalle: String!
+  fecha_compra: String!
+}
+
+input UpdateCompraDto {
+  fecha_compra: String!
+}
