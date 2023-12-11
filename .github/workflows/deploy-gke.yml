@@ -2,8 +2,7 @@ name: Deploy K8S
 
 on:
   push:
-    branches: 
-      - main
+    branches: [ "main" ]
   workflow_dispatch:
 
 jobs:
@@ -24,6 +23,6 @@ jobs:
 
       - name: Deploy to GKE
         run: |
-          cd /k8s
+          cd ../k8s
           kubectl apply -f ./auth-gateway -f ./backend -f ./frontend -f ./auth-microservice -f ./mongo -f ./postgresql -f ./socket -f ./graphql
           kubectl get pods
