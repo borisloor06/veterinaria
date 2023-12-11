@@ -37,6 +37,7 @@ jobs:
       # Step 4: Build Docker Image
       # - Explanation: Build Docker images with the specified version and latest tag
       - name: Build Docker Image
+        working-directory: ./microservice-auth
         env:
           NEW_VERSION: ${{ steps.version.outputs.version }}
         run: |
