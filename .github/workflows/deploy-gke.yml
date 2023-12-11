@@ -26,14 +26,15 @@ jobs:
           workload_identity_provider: projects/1055208873800/locations/global/workloadIdentityPools/github/providers/veterinaria
 
       - name: Configure kubectl
-        working-directory: ./kube
         uses: tale/kubectl-action@v1
         with:
           base64-kube-config: ${{ secrets.KUBE_CONF }}
           kubectl-version: v1.24.2
+      - run: ls
 
       - name: Deploy to GKE
         working-directory: ./kube
         run: |
+          ls
           kubectl apply -f ./auth-gateway -f ./backend -f ./frontend -f ./auth-microservice -f ./mongo -f ./postgresql -f ./socket -f ./graphql
           kubectl get pods
