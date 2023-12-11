@@ -20,7 +20,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: google-github-actions/setup-gcloud@v2
+      - uses: google-github-actions/auth@v2
         with:
           project_id: ${{ secrets.GKE_PROJECT }}
           workload_identity_provider: projects/1055208873800/locations/global/workloadIdentityPools/github/providers/veterinaria
