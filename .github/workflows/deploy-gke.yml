@@ -20,7 +20,7 @@ jobs:
       - name: Set up GKE
         uses: 'google-github-actions/auth@v2'
         with:
-          credentials_json: '${{ secrets.KUBE_JSON_CONF }}'
+          workload_identity_provider: projects/1055208873800/locations/global/workloadIdentityPools/github/providers/veterinaria
 
       - name: Deploy to GKE
         working-directory: ./kube
