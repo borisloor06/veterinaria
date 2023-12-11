@@ -24,6 +24,7 @@ jobs:
         uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: projects/1055208873800/locations/global/workloadIdentityPools/github/providers/veterinaria
+          project_id: ${{ secrets.GKE_PROJECT }}
 
       - id: 'get-credentials'
         uses: 'google-github-actions/get-gke-credentials@v1'
