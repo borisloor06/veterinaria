@@ -11,7 +11,14 @@ jobs:
     timeout-minutes: 5
     
     steps:
-      - run : echo $PWD
+      steps:
+      # Step 1: Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - run: ls
 
       - name: GKE Set Context
         uses: google-github-actions/setup-gcloud@v0.6.0
@@ -19,10 +26,11 @@ jobs:
           service_account_key: ${{ secrets.GKE_SA_KEY }}
           project_id: ${{ secrets.GKE_PROJECT }}
           export_default_credentials: true 
-      - run : echo $PWD
 
       - name: Deploy to GKE
+        working-directory: ./kube
         run: |
-          cd ../k8s
+          ls
+          echo $PWD
           kubectl apply -f ./auth-gateway -f ./backend -f ./frontend -f ./auth-microservice -f ./mongo -f ./postgresql -f ./socket -f ./graphql
           kubectl get pods
