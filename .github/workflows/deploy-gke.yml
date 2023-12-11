@@ -21,7 +21,9 @@ jobs:
           export_default_credentials: true 
 
       - name: Deploy
-        working-directory: k8s
-        run: |- 
+        working-directory: /k8s
+        run: |
+          ls
+          pwd
           kubectl apply -f ./auth-gateway -f ./backend -f ./frontend -f ./auth-microservice -f ./mongo -f ./postgresql -f ./socket -f ./graphql
           kubectl get pods
