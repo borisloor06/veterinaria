@@ -17,17 +17,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: GKE Set Context
-        uses: google-github-actions/setup-gcloud@v0.6.0
+      - name: Set up GKE
+        uses: 'google-github-actions/auth@v2'
         with:
-          service_account_key: ${{ secrets.GKE_SA_KEY }}
-          project_id: ${{ secrets.GKE_PROJECT }}
-          export_default_credentials: true 
-
-      - uses: tale/kubectl-action@v1
-        with:
-          base64-kube-config: ${{ secrets.KUBE_CONF }}
-          kubectl-version: v1.24.2
+          credentials_json: '${{ secrets.KUBE_JSON_CONF }}'
 
       - name: Deploy to GKE
         working-directory: ./kube
