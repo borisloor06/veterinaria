@@ -2,26 +2,26 @@ name: Deploy K8S
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [main]
   workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
+
     permissions:
-      contents: 'read'
-      id-token: 'write'
+      contents: read
+      id-token: write
 
     steps:
-      # Step 1: Checkout code
       - name: Checkout code
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
       - name: Set up GKE
-        uses: 'google-github-actions/auth@v2'
+        uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: projects/1055208873800/locations/global/workloadIdentityPools/github/providers/veterinaria
 
@@ -30,11 +30,22 @@ jobs:
         with:
           base64-kube-config: ${{ secrets.KUBE_CONF }}
           kubectl-version: v1.24.2
-      - run: ls
+
+      - name: List files in kube directory
+        run: |
+          ls kube/
 
       - name: Deploy to GKE
         working-directory: ./kube
         run: |
-          ls
-          kubectl apply -f ./auth-gateway -f ./backend -f ./frontend -f ./auth-microservice -f ./mongo -f ./postgresql -f ./socket -f ./graphql
-          kubectl get pods
+          kubectl apply -f auth-gateway/
+          kubectl apply -f backend/
+          kubectl apply -f frontend/
+          kubectl apply -f auth-microservice/
+          kubectl apply -f mongo/
+          kubectl apply -f postgresql/
+          kubectl apply -f socket/
+          kubectl apply -f graphql/
+
+      - name: Get pods status
+        run: kubectl get pods
