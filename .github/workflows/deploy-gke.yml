@@ -7,15 +7,10 @@ on:
   workflow_dispatch:
 
 jobs:
-
   deploy:
     runs-on: ubuntu-latest
     timeout-minutes: 5
-
-    defaults:
-      run:
-        working-directory: ./k8s
-
+    
     steps:
       - name: GKE Set Context
         uses: google-github-actions/setup-gcloud@v0.6.0
@@ -23,6 +18,7 @@ jobs:
           service_account_key: ${{ secrets.GKE_SA_KEY }}
           project_id: ${{ secrets.GKE_PROJECT }}
           export_default_credentials: true 
+          working-directory: ./k8s
 
       - name: Deploy to GKE
         run: |
