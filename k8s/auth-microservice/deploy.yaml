@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: microservice
-        image: bloor06/veterinaria-microservice:0.0.6
+        image: bloor06/veterinaria-microservice:latest
         ports:
         - containerPort: 3005
         env:

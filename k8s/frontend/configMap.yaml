@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: frontend-config
 data:
-  BACKEND_URL: http://backend-service:80
-  AUTH_URL: http://auth-service:3000
-  GRAPHQL_URL: http://graphql-service:3001
-  SOCKET_URL: http://socket-service:3002
+  BACKEND_URL: http://104.197.196.148:80
+  AUTH_URL: http://34.170.142.73:3000
+  GRAPHQL_URL: http://35.192.166.125:3001 
+  SOCKET_URL: http://34.41.108.238:3002

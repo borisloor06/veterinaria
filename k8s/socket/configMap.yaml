@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: socket-config
 data:
-  AUTH_API_URL: http://localhost:3000/auth
+  AUTH_API_URL: http://34.170.142.73:3000/auth

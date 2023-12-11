@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: microservice-config
 data:
-  DB_CONNECTION_STRING: 'mongodb://kubernetes:clave@mongo-service:27017/veterinaria?retryWrites=true&w=majority'
+  DB_CONNECTION_STRING: 'mongodb://kubernetes:clave@34.118.231.151:27017/auth?retryWrites=true&w=majority'
   JWT_SECRET_KEY: veterinariaJWTsuperSecrectKey
   AMQP_URL: 'amqps://vaygsqtq:rh9Vwc7cNEaq5nE4vOxDuDJmVFrirqq6@fish.rmq.cloudamqp.com/vaygsqtq'
   

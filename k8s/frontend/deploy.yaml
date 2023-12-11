@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: bloor06/veterinaria-front:0.0.6
+        image: bloor06/veterinaria-front:latest
         ports:
         - containerPort: 3006
         env:

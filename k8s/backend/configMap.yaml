@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: backend-config
 data:
-  MONGO_SERVICE: mongodb://kubernetes:clave@mongo-service:27017/?retryWrites=true&w=majority
+  MONGO_SERVICE: mongodb://kubernetes:clave@34.118.231.151:27017/?retryWrites=true&w=majority

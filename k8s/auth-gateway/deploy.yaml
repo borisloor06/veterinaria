@@ -16,17 +16,17 @@ spec:
     spec:
       containers:
       - name: auth
-        image: bloor06/veterinaria-auth:0.0.6
+        image: bloor06/veterinaria-auth:latest
         ports:
         - containerPort: 3000
         env:
-        - name: AUTH_API_URL
+        - name: AMQP_URL
           valueFrom:
             configMapKeyRef:
               name: auth-config
-              key: AUTH_API_URL
-        - name: AUTH_API_URL
+              key: AMQP_URL
+        - name: DB_CONNECTION_STRING
           valueFrom:
             configMapKeyRef:
               name: auth-config
-              key: AUTH_API_URL
+              key: DB_CONNECTION_STRING

@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: graphql
-        image: bloor06/veterinaria-graphql:0.0.6
+        image: bloor06/veterinaria-graphql:latest
         ports:
         - containerPort: 3002
         env:

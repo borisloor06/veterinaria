@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: socket
-        image: bloor06/veterinaria-socket:0.0.6
+        image: bloor06/veterinaria-socket:latest
         ports:
         - containerPort: 3002
         env:
