@@ -1,0 +1,53 @@
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+        - 'backend/**'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      # Step 2: Git Semantic Versioning
+      - name: Git Semantic Version
+        uses: PaulHatch/semantic-version@v5.3.0
+        with:
+          major_pattern: "major:"
+          minor_pattern: "feat:"
+          version_format: "${major}.${minor}.${patch}-prerelease${increment}"
+        id: version
+
+      # Step 3: Docker Login
+      # - Explanation: Log in to Docker Hub using credentials from secrets
+      - name: Docker Login
+        uses: docker/login-action@v3.0.0
+        with:
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+
+      # Step 4: Build Docker Image
+      # - Explanation: Build Docker images with the specified version and latest tag
+      - name: Build Docker Image
+        env:
+          NEW_VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          docker build -t bloor06/veterinaria:$NEW_VERSION .
+          docker build -t bloor06/veterinaria:latest .
+
+      # Step 5: Push Docker Image
+      # - Explanation: Push Docker images to Docker Hub with the specified version
+      - name: Push Docker Image
+        env:
+          NEW_VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          docker push bloor06/practica4:$NEW_VERSION
+          docker push bloor06/practica4:latest
