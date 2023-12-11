@@ -25,11 +25,11 @@ jobs:
         with:
           workload_identity_provider: projects/1055208873800/locations/global/workloadIdentityPools/github/providers/veterinaria
 
-      - name: Configure kubectl
-        uses: tale/kubectl-action@v1
+      - id: 'get-credentials'
+        uses: 'google-github-actions/get-gke-credentials@v1'
         with:
-          base64-kube-config: ${{ secrets.KUBE_CONF }}
-          kubectl-version: v1.24.2
+          cluster_name: 'vet-cluster'
+          location: 'us-central1'
 
       - name: List files in kube directory
         run: |
