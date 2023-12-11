@@ -26,10 +26,10 @@ jobs:
           workload_identity_provider: projects/1055208873800/locations/global/workloadIdentityPools/github/providers/veterinaria
 
       - uses: tale/kubectl-action@v1
+        working-directory: ./kube
         with:
           base64-kube-config: ${{ secrets.KUBE_CONF }}
           kubectl-version: v1.24.2
-
       - name: Deploy to GKE
         working-directory: ./kube
         run: |
