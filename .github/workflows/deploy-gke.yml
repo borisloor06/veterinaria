@@ -30,6 +30,7 @@ jobs:
         with:
           project_id: ${{ secrets.GKE_PROJECT }}
           cluster_name: ${{ secrets.GKE_CLUSTER }}
+          location: us-central1
 
       - name: List files in kube directory
         run: |
