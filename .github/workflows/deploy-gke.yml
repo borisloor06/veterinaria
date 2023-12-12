@@ -39,12 +39,12 @@ jobs:
       - name: Deploy to GKE
         working-directory: ./kube
         run: |
+          kubectl apply -f postgresql/
+          kubectl apply -f mongo/
           kubectl apply -f auth-gateway/
           kubectl apply -f backend/
           kubectl apply -f frontend/
           kubectl apply -f auth-microservice/
-          kubectl apply -f mongo/
-          kubectl apply -f postgresql/
           kubectl apply -f socket/
           kubectl apply -f graphql/
 
