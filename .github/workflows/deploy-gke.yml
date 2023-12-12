@@ -50,3 +50,6 @@ jobs:
 
       - name: Get pods status
         run: kubectl get pods
+      
+      - name: Get restart pods
+        run: kubectl rollout restart deployment --all
