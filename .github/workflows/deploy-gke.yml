@@ -52,4 +52,4 @@ jobs:
         run: kubectl get pods
       
       - name: Get restart pods
-        run: kubectl rollout restart deployment --all
+        run: kubectl rollout restart
